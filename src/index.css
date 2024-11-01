@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-start: theme('colors.gray.100');
+    --gradient-middle: theme('colors.gray.50');
+    --gradient-end: theme('colors.gray.100');
+  }
+
+  :root[class~="dark"] {
+    --gradient-start: theme('colors.gray.900');
+    --gradient-middle: theme('colors.gray.800');
+    --gradient-end: theme('colors.gray.900');
+  }
+
+  body {
+    @apply antialiased bg-gradient-to-br from-[var(--gradient-start)] via-[var(--gradient-middle)] to-[var(--gradient-end)];
+    background-size: 200% 200%;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  /* Light theme text color overrides */
+  :root:not([class~="dark"]) {
+    & h1, & h2, & h3, & h4, & h5, & h6 {
+      @apply text-gray-900;
+    }
+
+    & p {
+      @apply text-gray-700;
+    }
+
+    & .subscription-card {
+      @apply bg-white shadow-lg;
+    }
+
+    & .subscription-card p {
+      @apply text-gray-600;
+    }
+
+    & .subscription-card h3 {
+      @apply text-gray-900;
+    }
+
+    & .glass-effect {
+      @apply bg-white/90 shadow-lg;
+    }
+
+    & .category-button {
+      @apply text-gray-700 bg-white hover:bg-gray-50;
+    }
+
+    & .category-button.active {
+      @apply text-white;
+    }
+
+    & .stat-card {
+      @apply bg-white text-gray-900;
+    }
+
+    & .stat-card .stat-label {
+      @apply text-gray-600;
+    }
+
+    & .modal-content {
+      @apply bg-white text-gray-900;
+    }
+
+    & .input-field {
+      @apply bg-white border-gray-300 text-gray-900;
+    }
+
+    & .input-label {
+      @apply text-gray-700;
+    }
+
+    & .subscription-variant {
+      @apply bg-white text-gray-900 hover:bg-gray-50;
+    }
+
+    & .subscription-variant.selected {
+      @apply bg-indigo-50 text-indigo-900;
+    }
+
+    & .subscription-price {
+      @apply text-indigo-700;
+    }
+
+    & .subscription-description {
+      @apply text-gray-600;
+    }
+
+    & .dashboard-header {
+      @apply text-gray-900;
+    }
+
+    & .dashboard-subtext {
+      @apply text-gray-600;
+    }
+
+    & .chart-legend {
+      @apply text-gray-700;
+    }
+
+    & .notification {
+      @apply bg-white text-gray-900;
+    }
+
+    & .button-primary {
+      @apply text-white;
+    }
+
+    & .button-secondary {
+      @apply text-gray-700 bg-white hover:bg-gray-50;
+    }
+
+    & .modal-title {
+      @apply text-gray-900;
+    }
+
+    & .modal-description {
+      @apply text-gray-600;
+    }
+  }
+}
+
+@layer components {
+  .subscription-card {
+    @apply transition-all duration-300 ease-in-out backdrop-blur-sm;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-md dark:bg-white/10;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .touch-action-pan-x {
+    touch-action: pan-x;
+  }
+
+  .touch-action-none {
+    touch-action: none;
+  }
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes scale-up-center {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes loading-bar {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.scale-up-center {
+  animation: scale-up-center 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.loading-bar {
+  animation: loading-bar 2s linear infinite;
+}
+
+.fade-out {
+  animation: fade-out 0.5s ease-out forwards;
+}
+
+.shake-warning {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.warning-tooltip {
+  @apply absolute -top-12 left-1/2 transform -translate-x-1/2 bg-red-500 text-white 
+         text-xs py-2 px-3 rounded shadow-lg opacity-0 transition-opacity duration-200;
+}
+
+.warning-tooltip.show {
+  @apply opacity-100;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
